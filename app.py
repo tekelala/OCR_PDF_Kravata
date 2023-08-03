@@ -5,12 +5,11 @@ from google.cloud import vision
 from pdf2image import convert_from_bytes
 import json
 
-
 def extract_text_from_pdf(file):
     """Extracts the text from a PDF file using the Google Vision API."""
 
     # Get the JSON key from the secrets manager
-    json_key = st.secrets["GOOGLE_CLOUD_VISION_JSON_KEY"]
+    json_key = st.secrets.google_cloud.vision_api_key
 
     # Write the JSON key to a temporary file
     json_key_file = "/tmp/json_key.json"
@@ -24,7 +23,7 @@ def extract_text_from_pdf(file):
     client = vision.ImageAnnotatorClient()
 
     # Convert the PDF file to images
-    images = convert_from_bytes(file.read())
+    images = convert_from_bytes(file.getvalue())
 
     # Initialize a variable to hold the text
     text = ""
