@@ -5,7 +5,6 @@ from google.cloud import vision
 from pdf2image import convert_from_bytes
 import json
 
-json_key = json.loads(st.secrets.google_cloud.vision_api_key)
 
 def extract_text_from_pdf(file):
     """Extracts the text from a PDF file using the Google Vision API."""
